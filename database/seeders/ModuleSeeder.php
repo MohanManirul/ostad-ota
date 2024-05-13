@@ -19,11 +19,21 @@ class ModuleSeeder extends Seeder
         DB::statement('DELETE FROM modules');
 
         DB::table('modules')->insert([
-           
+            
             [ 
                 'id' => 1, 
                 'name' => 'Air Ticket Management',
                 'key' => 'air_ticket_module',
+                'icon' => 'fas fa-users',
+                'sequence' => 1,
+                'route' => null,
+                'created_at' => $date,
+                'updated_at' => $date,
+            ],
+            [  
+                'id' => 2, 
+                'name' => 'Hotel Management',
+                'key' => 'hotel_module',
                 'icon' => 'fas fa-users',
                 'sequence' => 2,
                 'route' => null,

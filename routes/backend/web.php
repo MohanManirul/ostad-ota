@@ -29,5 +29,12 @@ Route::group(['prefix' =>'/{guard?}dashboard', 'middleware' => ['jwt']],function
     //user module routes end
 
 
+    //user module routes start
+    Route::group(['prefix' => 'hotel-module'], function () {
+        require_once 'hotel_module/hotel.php';
+    });
+    //user module routes end
+
+
 
 });

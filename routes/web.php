@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+ 
 
 Route::get('/clear', function () {
     Artisan::call('optimize:clear');
@@ -9,6 +10,7 @@ Route::get('/clear', function () {
     Artisan::call('route:clear');
     return 'success';
 });
+
 
 
 /*
@@ -22,6 +24,7 @@ require_once 'backend/web.php';
 | Backend Routes End
 |----------------------------------------------
 */
+
 
 /*
 |----------------------------------------------

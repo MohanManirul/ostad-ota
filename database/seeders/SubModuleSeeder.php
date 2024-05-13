@@ -20,7 +20,7 @@ class SubModuleSeeder extends Seeder
 
         DB::table('sub_modules')->insert([
             
-           
+            
             [
                 'id' => 1,
                 'name' => 'All City',
@@ -41,6 +41,17 @@ class SubModuleSeeder extends Seeder
                 'created_at' => $date,
                 'updated_at' => $date,
             ],
+            [
+                'id' => 3,
+                'name' => 'All Hotels',
+                'key' => 'all_hotels',
+                'sequence' => 1,
+                'route' => 'hotel.index',
+                'module_id' => 2,
+                'created_at' => $date,
+                'updated_at' => $date,
+            ],
+            
            
             
         ]);

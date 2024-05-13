@@ -12,3 +12,4 @@ Route::controller(CityController::class)->prefix('/cities')->group(function(){
 
     });
 //route end
+ 
