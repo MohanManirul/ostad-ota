@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en" data-layout="vertical" data-sidebar="light" data-sidebar-size="lg" data-sidebar-image="none">
 
@@ -12,26 +11,26 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-   <!--css start-->
-   @include('backend.layouts._css')
-   <!--css end-->
+    <!--css start-->
+    @include('backend.layouts._css')
+    <!--css end-->
 
-<style>
-    #back-to-top{
-        bottom: 60px;
-    }
-</style>
+    <style>
+        #back-to-top {
+            bottom: 60px;
+        }
+    </style>
 
 </head>
 
 <body>
-        {{-- progree bar start --}}
-        <div id="loader" class="LoadingOverlay d-none">
-            <div class="Line-Progress">
-                <div class="indeterminate"></div>
-            </div>
+    {{-- progree bar start --}}
+    <div id="loader" class="LoadingOverlay d-none">
+        <div class="Line-Progress">
+            <div class="indeterminate"></div>
         </div>
-        {{-- progree bar end --}}
+    </div>
+    {{-- progree bar end --}}
 
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -39,20 +38,24 @@
         @include('backend.layouts._topBar')
         @include('backend.layouts._leftSideBar')
 
-  
+
 
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="main-content">
-
-            @yield('content')
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    @yield('content')
+                    <!-- end page title -->
+                </div>
+                <!-- container-fluid -->
+            </div>
 
             @include('backend.layouts._footer')
-
         </div>
         <!-- end main content-->
-
     </div>
     <!-- END layout-wrapper -->
 

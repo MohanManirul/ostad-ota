@@ -28,7 +28,6 @@ class UserSeeder extends Seeder
                 'phone' => '01915985336',
                 'password' => Hash::make(123456),
                 'otp' => '0',
-                'role_id' => '1',
                 'is_active' => '1',
                 'is_delete' => '0',
                 'created_at' => $date,
