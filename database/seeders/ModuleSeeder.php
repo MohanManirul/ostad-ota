@@ -45,7 +45,7 @@ class ModuleSeeder extends Seeder
                 'name' => 'Turist Guide',
                 'key' => 'turist_module',
                 'icon' => 'fas fa-users',
-                'sequence' => 2,
+                'sequence' => 3,
                 'route' => null,
                 'created_at' => $date,
                 'updated_at' => $date,

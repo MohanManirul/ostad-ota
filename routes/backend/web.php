@@ -25,6 +25,7 @@ Route::group(['prefix' =>'/{guard?}dashboard', 'middleware' => ['jwt']],function
     Route::group(['prefix' => 'custom_module'], function () {
         require_once 'air_ticket_module/city.php';
         require_once 'air_ticket_module/airport.php';
+        require_once 'air_ticket_module/flight.php';
     });
     //user module routes end
 

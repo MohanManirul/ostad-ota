@@ -43,6 +43,16 @@ class SubModuleSeeder extends Seeder
             ],
             [
                 'id' => 3,
+                'name' => 'Basic Crud',
+                'key' => 'basic_crud',
+                'sequence' => 1,
+                'route' => 'flight.index',
+                'module_id' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
+            ],
+            [
+                'id' => 4,
                 'name' => 'All Hotels',
                 'key' => 'all_hotels',
                 'sequence' => 1,
