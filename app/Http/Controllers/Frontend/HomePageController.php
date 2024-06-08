@@ -32,5 +32,10 @@ class HomePageController extends Controller
         return view($this->folderPath.'landing-page');
     }
 
-
+    public function index(){
+        return view('frontend.index.pages.home');
+    }
+     public function flightList(){
+        return view('frontend.index.pages.flight_list');
+    }
 }
