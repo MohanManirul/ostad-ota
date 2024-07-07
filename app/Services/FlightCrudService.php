@@ -9,11 +9,14 @@ use Intervention\Image\Laravel\Facades\Image;
 class FlightCrudService{
     public function store( $name, $start_date , $end_date , $image){
     
-        $year = date('Y');
-        $img = $year . '_' . time() . '_' . Str::random(12) . '.' . $image->getClientOriginalExtension();
+        // $year = date('Y');
+        // $img = $year . '_' . time() . '_' . Str::random(12) . '.' . $image->getClientOriginalExtension();
       
-        $location = public_path('assets/images/' . $img);      
-        Image::read($image)->save($location);           
+        // $location = public_path('assets/images/' . $img);      
+        // Image::read($image)->save($location);    
+        
+        
+        $img = saveImage($image, '/uploads/flight/images');
      
         FlightDay::create([
             'name' => $name,

@@ -1,0 +1,172 @@
+
+<?php
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}Http\Controllers\Controller;
+use Illuminate\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\Helper\ResponseHelper;
+use Exception;
+
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
+
+class {{ class }} extends Controller
+{
+   //constructor function
+
+    protected $folderPath;
+    protected $customCrudService;
+    public function __construct(CustomCrudService $customCrudService)
+    {
+        $this->folderPath = 'backend.pages.student_module.';
+        $this->customCrudService = $customCrudService ;
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index():View
+    {
+        if(can('all_medium') || request()->header('role') == 'superadmin'){
+            return view($this->folderPath.'medium-page');
+        }else{
+            return view('errors.404');
+        }
+    }
+
+
+
+    /**
+     * Display the specified resource.
+    */
+  
+     public function show(Request $request):JsonResponse
+     {  
+         if(can('view_medium') || request()->header('role') == 'superadmin'){
+             try{
+                 $data = Medium::select('id','name','code','status',
+                                             'creator_id','created_by','updator_id','updated_by','created_at','updated_at')
+                                             ->findOrFail($request->id);
+                 return ResponseHelper::Out('success',$data,200);
+             }catch(Exception $e){
+                 return ResponseHelper::Out('fail',$e->getMessage(),200);
+             }
+         }else{
+             return view('errors.404');
+         } 
+     }
+
+
+     /**
+     * Display a listing of the resource.
+     */
+    public function data(Request $request):LengthAwarePaginator
+    {
+        
+        if(can('all_medium') || request()->header('role') == 'superadmin'){
+            try{
+                $perPage = $request->perPage ?? 5;
+                $keyword = $request->keyword; 
+                
+                $query = Medium::query();
+
+                if ($keyword) {
+                    $query = $query->select('id','name','code','status')                                                   
+                            ->where('name', 'like', '%' . $keyword . '%');
+                            $query->orWhere('code', 'like', '%' . $keyword . '%');                           
+                            $query->orWhere('status', 'like', '%' . $keyword . '%');                           
+                     
+                    }
+
+                return  $query->orderByDesc('id')->paginate($perPage)->withQueryString();
+           }catch(Exception $e){
+               return ResponseHelper::Out('fail',$e->getMessage(),200);
+           }
+        }else{
+            return view('errors.404');
+        }
+    }
+
+
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+
+
+    /**
+     * Store a newly created resource in storage.
+     */
+        /**
+     * Store a newly created resource in storage.
+     */
+    public function store(CustomRequest $request):JsonResponse
+    {
+        if(can('add_medium') || request()->header('role') == 'superadmin'){       
+            try{
+                $this->mediumCrudService->store($request->name, $request->code, $request->status);
+                return ResponseHelper::Out('success',"",200);
+            }catch(Exception $e){
+                return ResponseHelper::Out('fail',$e->getMessage(),200);
+            }
+        }else{
+            return view('errors.404');
+        }
+    }
+
+    
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id):JsonResponse
+    {
+        if(can('edit_medium') || request()->header('role') == 'superadmin'){
+            try{
+                $data = Medium::select('id','name','code','status')->findOrFail($request->input('id'));
+                return ResponseHelper::Out('success',$data,200);
+            }catch(Exception $e){
+                return ResponseHelper::Out('fail',$e->getMessage(),200);
+            }
+        }else{
+            return view('errors.404');
+        } 
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(CustomRequest $request):JsonResponse
+    {
+        if(can('edit_medium') || request()->header('role') == 'superadmin'){       
+            try{
+                $this->mediumCrudService->update($request->id, $request->name, $request->code, $request->status);
+                return ResponseHelper::Out('success',"",200);               
+            }catch(Exception $e){
+                return ResponseHelper::Out('fail',$e->getMessage(),200);
+            }
+        }else{
+            return view('errors.404');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}
+
