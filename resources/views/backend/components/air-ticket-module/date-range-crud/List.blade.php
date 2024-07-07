@@ -47,13 +47,17 @@
 
             var guard = "{{ guardCheck() }}"
 
+
+
+
+
             let res = await axios.get(`/${guard}dashboard/custom_module/flights/data`);
             let tableList = $("#tableList");
             res.data['data'].map(function(item, index) {
                 let row = `<tr>
                             <td>${index+1}</td>
                             <td>${item['name']}</td>
-                            <td><img class="rounded avatar-sm" alt="" src="{{ asset('assets/images/${item.image}') }}"></td>                        
+                             <td><img class="rounded avatar-sm" alt="" src="{{ asset('') }}$(item.image)"></td>                        
                             <td>${item['start_date']}</td>
                             <td>${item['end_date']}</td>
                             <td>
